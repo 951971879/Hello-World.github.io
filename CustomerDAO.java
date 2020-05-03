@@ -193,6 +193,7 @@ cin>>a>>b>>c;
 if(a==b)
 {if(b==c)
 {cout<<"pass";}
+
 else
 cout<<"fail";
 }
