@@ -1,0 +1,95 @@
+#include <map>
+#include <vector>
+
+Class test
+
+{
+
+public:
+
+void list_Map();
+
+private:
+
+map<string,string> pensonnel;
+map<string,string>::iterator iter;
+
+}
+
+ 
+
+test.cpp:
+
+void test::list_Map()
+
+{
+
+ifstream infile;
+infile.open("D:\\XX.dpi");
+char buffer[1024]={0};
+int i=0;
+int chang_first=0;
+int chang_last=0;
+int value_first=0;
+int value_last=0;
+char key_tag[10]={0};
+char value_tag[1024]={0};
+if (!infile)
+{
+return false;
+
+}
+while (!infile.eof() ) 
+{ 
+infile.getline (buffer,1024);
+
+i = StringFind(buffer,"Name");
+
+if(i!=-1)
+{
+chang_first = StringFind(buffer,"\"");
+chang_last = StringFind(buffer,"Length");
+memcpy(key_tag,buffer+chang_first+1,chang_last-2-chang_first-1);
+value_first = StringFind(buffer,"\">");
+value_last = StringFind(buffer,"</DGI>");
+memcpy(value_tag,buffer+value_first+2,value_last-2-value_first);
+string key_string(key_tag);
+string value_string(value_tag);
+cout<<"insert:"<<key_string<<","<<value_string<<endl;
+pensonnel.insert(pair<string, string>(key_string, value_string));
+
+}
+
+}
+printf("mapsize=%d\n",pensonnel.size());
+
+for(iter=pensonnel.begin();iter !=pensonnel.end();iter++)
+{
+cout<<i<<":"<<iter->first<<", "<<iter->second<<endl;
+}
+
+}
+
+其中文件XX.dpi内容为：
+
+<?xml version="1.0" encoding="GBK" ?>
+<PersoFile>
+<CardCounter>5</CardCounter>
+<Version>1</Version>
+<CardType>0001</CardType>
+<Reserve></Reserve>
+<CardData>
+
+<AID Length="8">A000000632010105</AID>
+
+<DGI Name="0015" Length="30">02195510FFFFFFFF02000310482000000000080120180704202807040101</DGI>
+<DGI Name="0016" Length="55">00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</DGI>
+<DGI Name="0017" Length="60">000001565500551000010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</DGI>
+
+<Print Type="PAN">310482 00 0000000080 5</Print>
+<Print Type="ExpDate">07/18</Print>
+<Print Type="EffDate">07/28</Print>
+
+</CardData>
+
+</PersoFile>
