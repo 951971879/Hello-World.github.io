@@ -187,3 +187,13 @@ public class CustomerDAO
 		}
 	}
 }
+public SRZ（）
+{int a,b,c;
+cin>>a>>b>>c;
+if(a==b)
+{if(b==c)
+{cout<<"pass";}
+else
+cout<<"fail";
+}
+}
